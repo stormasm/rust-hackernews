@@ -27,6 +27,9 @@ fn write_json_to_redis(json: Value) -> redis::RedisResult<()> {
 
     println!("{}",json);
 
+    // let myid = serde_json::from_str::json[0];
+
+
     let myid: String = json[0].to_string();
 
     println!("No !! {}", myid);
