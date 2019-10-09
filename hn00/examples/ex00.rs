@@ -5,6 +5,7 @@ use std::string::String;
 
 use redis::Commands;
 use serde_json::{Result, Value};
+//use serde_json::Value;
 
 fn read_file_to_string(filename: String) -> String {
     let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
@@ -24,9 +25,9 @@ fn write_json_to_redis(json: Value) -> redis::RedisResult<()> {
     let client = redis::Client::open("redis://127.0.0.1/")?;
     let mut con = client.get_connection()?;
 
-    let myid = &json[0];
+    let myid:String = json[0].to_string();
 
-    // con.set("rick", myid)?;
+    con.set("rick", myid)?;
 
     let k: Option<String> = con.get("rick")?;
     let k1 = k.unwrap();
