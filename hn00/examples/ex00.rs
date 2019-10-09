@@ -3,6 +3,7 @@ use std::fs;
 use std::process;
 use std::string::String;
 
+use redis::Commands;
 use serde_json::{Result, Value};
 
 fn read_file_to_string(filename: String) -> String {
@@ -19,6 +20,23 @@ fn string_to_json(data: String) -> Result<(Value)> {
     Ok(v)
 }
 
+fn write_json_to_redis(json: Value) -> redis::RedisResult<()> {
+    let client = redis::Client::open("redis://127.0.0.1/")?;
+    let mut con = client.get_connection()?;
+
+    let myid = &json[0];
+
+    // con.set("rick", myid)?;
+
+    let k: Option<String> = con.get("rick")?;
+    let k1 = k.unwrap();
+
+    //let deserialized:String = serde_json::from_str(&k1).unwrap();
+    //println!("Deserialized: {:?}", deserialized);
+
+    Ok(())
+}
+
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
@@ -33,4 +51,6 @@ fn main() {
 
     let json = string_to_json(data).unwrap();
     println!("{}", json[0]);
+
+    write_json_to_redis(json);
 }
