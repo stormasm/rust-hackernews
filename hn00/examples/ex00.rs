@@ -10,13 +10,13 @@ fn read_file_to_string(filename: String) -> String {
     contents
 }
 
-fn string_to_json(data: String) -> Result<()> {
+fn string_to_json(data: String) -> Result<(Value)> {
     // Parse the string of data into serde_json::Value.
     let v: Value = serde_json::from_str(&data)?;
 
     println!("{}", v[0]);
 
-    Ok(())
+    Ok(v)
 }
 
 fn main() {
@@ -31,5 +31,6 @@ fn main() {
     let data = read_file_to_string(filename.to_string());
     println!("With text:\n{}", data);
 
-    string_to_json(data);
+    let json = string_to_json(data).unwrap();
+    println!("{}", json[0]);
 }
