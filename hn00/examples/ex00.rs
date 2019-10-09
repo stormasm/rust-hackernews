@@ -25,12 +25,18 @@ fn write_json_to_redis(json: Value) -> redis::RedisResult<()> {
     let client = redis::Client::open("redis://127.0.0.1/")?;
     let mut con = client.get_connection()?;
 
-    let myid:String = json[0].to_string();
+    let myid: String = json[0].to_string();
+
+    println!("No !! {}", myid);
 
     con.set("rick", myid)?;
 
     let k: Option<String> = con.get("rick")?;
     let k1 = k.unwrap();
+
+    println!("No !! {}", k1);
+
+    redis::cmd("SADD").arg("bill").arg(k1).execute(&mut con);
 
     //let deserialized:String = serde_json::from_str(&k1).unwrap();
     //println!("Deserialized: {:?}", deserialized);
