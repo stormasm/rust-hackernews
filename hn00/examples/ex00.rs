@@ -25,16 +25,13 @@ fn write_json_to_redis(json: Value) -> redis::RedisResult<()> {
     let client = redis::Client::open("redis://127.0.0.1/")?;
     let mut con = client.get_connection()?;
 
-    println!("{}",json);
+    println!("{}", json);
 
     // let myid = serde_json::from_str::json[0];
 
-
     // let myid: String = json[0].to_string();
 
-
     let myid = String::from("999");
-
 
     println!("No !! {}", myid);
 
@@ -68,5 +65,5 @@ fn main() {
     let json = string_to_json(data).unwrap();
     println!("{}", json[0]);
 
-    write_json_to_redis(json);
+    let _x = write_json_to_redis(json);
 }
