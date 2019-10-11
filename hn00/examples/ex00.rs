@@ -16,7 +16,7 @@ fn string_to_json(data: String) -> Result<(Value)> {
     // Parse the string of data into serde_json::Value.
     let v: Value = serde_json::from_str(&data)?;
 
-    println!("{}", v[0]);
+    // println!("{}", v[0]);
 
     Ok(v)
 }
@@ -42,8 +42,6 @@ fn write_json_to_redis(json: Value) -> redis::RedisResult<()> {
         // redis::cmd("SADD").arg("bill").arg(&vx).execute(&mut con);
     }
 
-
-
     let myid = String::from("999");
 
     con.set("rick", myid)?;
@@ -68,10 +66,10 @@ fn main() {
     println!("In file {}", filename);
 
     let data = read_file_to_string(filename.to_string());
-    println!("With text:\n{}", data);
+    // println!("With text:\n{}", data);
 
     let json = string_to_json(data).unwrap();
-    println!("{}", json[0]);
+    // println!("{}", json[0]);
 
     let _x = write_json_to_redis(json);
 }
