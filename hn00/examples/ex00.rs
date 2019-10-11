@@ -31,9 +31,20 @@ fn write_json_to_redis(json: Value) -> redis::RedisResult<()> {
 
     // let myid: String = json[0].to_string();
 
-    let myid = String::from("999");
+    // Convert the serde value to a Vector
+    let vec = json.as_array().unwrap();
 
-    println!("No !! {}", myid);
+
+    // iterate over the vector
+    for i in 0..vec.len() {
+        let vx = &vec[i].as_str().unwrap();
+        println!("{}", vx);
+        // redis::cmd("SADD").arg("bill").arg(&vx).execute(&mut con);
+    }
+
+
+
+    let myid = String::from("999");
 
     con.set("rick", myid)?;
 
@@ -43,9 +54,6 @@ fn write_json_to_redis(json: Value) -> redis::RedisResult<()> {
     println!("No !! {}", k1);
 
     redis::cmd("SADD").arg("bill").arg(k1).execute(&mut con);
-
-    //let deserialized:String = serde_json::from_str(&k1).unwrap();
-    //println!("Deserialized: {:?}", deserialized);
 
     Ok(())
 }
