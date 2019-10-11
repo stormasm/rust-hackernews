@@ -37,12 +37,16 @@ fn write_json_to_redis(json: Value) -> redis::RedisResult<()> {
 
     // iterate over the vector
     for i in 0..vec.len() {
-        let vx = &vec[i].as_str().unwrap();
-        println!("{}", vx);
-        // redis::cmd("SADD").arg("bill").arg(&vx).execute(&mut con);
+        //let vx = &vec[i].as_str().unwrap();
+        //println!("{}", vx);
+        let vy = &vec[i].as_str().unwrap().to_string();
+        // let () = vy;
+        redis::cmd("SADD").arg("bill").arg(vy).execute(&mut con);
     }
 
     let myid = String::from("999");
+
+    // let () = myid;
 
     con.set("rick", myid)?;
 
@@ -52,6 +56,10 @@ fn write_json_to_redis(json: Value) -> redis::RedisResult<()> {
     println!("No !! {}", k1);
 
     redis::cmd("SADD").arg("bill").arg(k1).execute(&mut con);
+
+    let jim = String::from("55");
+
+    redis::cmd("SADD").arg("bill").arg(jim).execute(&mut con);
 
     Ok(())
 }
