@@ -18,3 +18,16 @@ to complete.  It is much easier to run smaller runs of fewer
 favorites and then combine them using this repo.
 
 More details will follow on examples of how to run these.
+
+### Details
+
+Each favorites json file must have overlapping id's starting
+with the 2nd file that is read.  This application prints
+out each file as it is read and also prints the overlapping
+id's so one knows that all of the id's have been covered.
+
+This makes creating the original json id files with
+[hackernews-favorites](https://github.com/stormasm/hackernews-favorites)
+relatively easy as one can error on the side of a little more redundancy
+and then have this program clean that up by using the Redis set
+to guarantee uniqueness and clean up the redundancy.
