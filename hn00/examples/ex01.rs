@@ -1,20 +1,14 @@
-
 use std::env;
-//use std::fs;
 use std::process;
 use std::string::String;
-
-use redis::Commands;
-
-use serde_json::{Value};
-use serde_json;
-
-
 
 use std::error::Error;
 use std::fs;
 use std::path::{Path, PathBuf};
 
+use redis::Commands;
+use serde_json::{Value};
+use serde_json;
 
 fn read_file_to_string(filename: String) -> String {
     let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
@@ -52,10 +46,6 @@ fn write_json_to_redis(json: Value) -> redis::RedisResult<()> {
     redis::cmd("SADD").arg("pete").arg(x55).execute(&mut con);
     Ok(())
 }
-
-
-
-
 
 fn dir_reader(mydir: String) -> Result<Vec<PathBuf>, Box<dyn Error>> {
     let mypath = Path::new(&mydir);
