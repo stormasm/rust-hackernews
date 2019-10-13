@@ -7,8 +7,8 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 use redis::Commands;
-use serde_json::{Value};
 use serde_json;
+use serde_json::Value;
 
 fn read_file_to_string(filename: String) -> String {
     let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
@@ -69,6 +69,9 @@ fn processor(mydir: String) -> Result<(), Box<dyn Error>> {
 
     for name in vec {
         println!("{:?}", name.file_name().ok_or("No filename")?);
+
+        //let data = read_file_to_string(filename.to_string());
+        let data = read_file_to_string(name.to_string_lossy().to_string());
     }
 
     Ok(())
