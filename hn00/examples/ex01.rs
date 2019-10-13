@@ -32,18 +32,22 @@ fn write_json_to_redis(json: Value) -> redis::RedisResult<()> {
     for i in 0..vec.len() {
         // you must convert &str to String
         let vy = &vec[i].as_str().unwrap().to_string();
-        redis::cmd("SADD").arg("bill").arg(vy).execute(&mut con);
+        redis::cmd("SADD")
+            .arg("set-hnfav")
+            .arg(vy)
+            .execute(&mut con);
     }
+    /*
+        let myid = String::from("999");
+        con.set("rick", myid)?;
 
-    let myid = String::from("999");
-    con.set("rick", myid)?;
+        let k: Option<String> = con.get("rick")?;
+        let k1 = k.unwrap();
+        redis::cmd("SADD").arg("pete").arg(k1).execute(&mut con);
 
-    let k: Option<String> = con.get("rick")?;
-    let k1 = k.unwrap();
-    redis::cmd("SADD").arg("pete").arg(k1).execute(&mut con);
-
-    let x55 = String::from("55");
-    redis::cmd("SADD").arg("pete").arg(x55).execute(&mut con);
+        let x55 = String::from("55");
+        redis::cmd("SADD").arg("pete").arg(x55).execute(&mut con);
+    */
     Ok(())
 }
 
