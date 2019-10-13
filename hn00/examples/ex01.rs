@@ -1,5 +1,5 @@
-// use std::env;
-// use std::process;
+use std::env;
+use std::process;
 use std::string::String;
 
 use std::error::Error;
@@ -36,17 +36,6 @@ fn write_json_to_redis(json: Value) -> redis::RedisResult<()> {
             .arg(vy)
             .execute(&mut con);
     }
-    /*
-        let myid = String::from("999");
-        con.set("rick", myid)?;
-
-        let k: Option<String> = con.get("rick")?;
-        let k1 = k.unwrap();
-        redis::cmd("SADD").arg("pete").arg(k1).execute(&mut con);
-
-        let x55 = String::from("55");
-        redis::cmd("SADD").arg("pete").arg(x55).execute(&mut con);
-    */
     Ok(())
 }
 
@@ -81,8 +70,16 @@ fn processor(mydir: String) -> Result<(), Box<dyn Error>> {
 
     Ok(())
 }
-// 3
+// 4
 fn main() {
-    let mydir = String::from("/tmp09/rust-hackernews/hn00/data/in");
-    let _ = processor(mydir);
+    //  hardcoded for testing purposes only
+    //  let mydir = String::from("/tmp09/rust-hackernews/hn00/data/in");
+
+    let args: Vec<String> = env::args().collect();
+    if args.len() != 2 {
+        println!("You need to enter a filename");
+        process::exit(1);
+    }
+    let mydir = &args[1];
+    let _ = processor(mydir.to_string());
 }
