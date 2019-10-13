@@ -1,12 +1,11 @@
-use std::env;
-use std::process;
+// use std::env;
+// use std::process;
 use std::string::String;
 
 use std::error::Error;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-use redis::Commands;
 use serde_json;
 use serde_json::Value;
 
@@ -82,7 +81,7 @@ fn processor(mydir: String) -> Result<(), Box<dyn Error>> {
 
     Ok(())
 }
-
+// 3
 fn main() {
     let mydir = String::from("/tmp09/rust-hackernews/hn00/data/in");
     let _ = processor(mydir);
