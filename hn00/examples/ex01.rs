@@ -72,6 +72,8 @@ fn processor(mydir: String) -> Result<(), Box<dyn Error>> {
 
         //let data = read_file_to_string(filename.to_string());
         let data = read_file_to_string(name.to_string_lossy().to_string());
+        let json = string_to_json(data).unwrap();
+        let _x = write_json_to_redis(json);
     }
 
     Ok(())
