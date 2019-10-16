@@ -77,7 +77,7 @@ fn main() {
 
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
-        println!("You need to enter a filename");
+        println!("You need to enter a directory");
         process::exit(1);
     }
     let mydir = &args[1];
