@@ -9,6 +9,5 @@ serde_json = "*"
 redis = "*"
 reqwest = "0.10.0-alpha.1"
 hyper-tls = "0.4.0-alpha.4"
-native-tls = "0.2"
-hyper = { version = "=0.13.0-alpha.4", default-features = false, features = ["tcp"] }
 tokio = "0.2.0-alpha.5"
+hyper = "0.13.0-alpha.4"
