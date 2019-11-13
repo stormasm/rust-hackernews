@@ -14,18 +14,13 @@ async fn main() -> Result<(), reqwest::Error> {
 
     println!("{}", url);
 
-    /*
+    let res = reqwest::Client::new().get(url.as_str()).send().await?;
 
-        let res = reqwest::Client::new()
-            .get("https://hacker-news.firebaseio.com/v0/item/8863.json")
-            .send()
-            .await?;
+    println!("Status: {}", res.status());
 
-        println!("Status: {}", res.status());
+    let body = res.text().await?;
 
-        let body = res.text().await?;
+    println!("Body:\n{}", body);
 
-        println!("Body:\n\n{}", body);
-    */
     Ok(())
 }
