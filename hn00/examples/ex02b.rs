@@ -1,5 +1,7 @@
 #![deny(warnings)]
 
+// use redis::Commands;
+
 fn build_url(favid: &str) -> String {
     let mut s = String::from("https://hacker-news.firebaseio.com/v0/item/");
 
@@ -24,13 +26,29 @@ async fn get_body(url: String) -> Result<(String), reqwest::Error> {
     Ok(body)
 }
 
+fn write_redis(body: String) -> redis::RedisResult<()> {
+    let client = redis::Client::open("redis://127.0.0.1/")?;
+    // let mut con = client.get_connection()?;
+    let mut con = client.get_connection().expect("Failed to connect to Redis");
+
+    let _x3 = redis::cmd("HSET")
+        .arg("hnfav11-14")
+        .arg("8863")
+        .arg(body)
+        .query::<u64>(&mut con)
+        .unwrap();
+
+    Ok(())
+}
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error> {
     let url = build_url("8863");
 
     println!("{}", url);
 
-    let _mybody = get_body(url).await?;
+    let body = get_body(url).await?;
+
+    let _ = write_redis(body);
 
     Ok(())
 }
