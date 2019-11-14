@@ -1,7 +1,3 @@
-#![deny(warnings)]
-
-// use redis::Commands;
-
 fn build_url(favid: &str) -> String {
     let mut s = String::from("https://hacker-news.firebaseio.com/v0/item/");
 
@@ -40,6 +36,7 @@ fn write_redis(body: String) -> redis::RedisResult<()> {
 
     Ok(())
 }
+
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error> {
     let url = build_url("8863");
