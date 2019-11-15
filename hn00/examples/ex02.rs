@@ -13,7 +13,7 @@ async fn get_body(url: String) -> Result<(String), reqwest::Error> {
         .expect("Problem 1");
 
     println!("Status: {}", res.status());
-    let body = res.text().await.expect("Problem 2");
+    let body = res.text().await.expect("Problem in method get_body");
     println!("Body:\n{}", body);
     Ok(body)
 }
