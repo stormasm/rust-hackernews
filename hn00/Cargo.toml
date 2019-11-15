@@ -7,7 +7,7 @@ edition = "2018"
 [dependencies]
 serde_json = "*"
 redis = "*"
-reqwest = "0.10.0-alpha.1"
+reqwest = "0.10.0-alpha.2"
 hyper-tls = "0.4.0-alpha.4"
 tokio = "0.2.0-alpha.5"
 hyper = "0.13.0-alpha.4"

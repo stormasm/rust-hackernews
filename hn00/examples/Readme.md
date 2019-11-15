@@ -7,13 +7,9 @@ Read a whole directory of hacker news favorites ids.
 
 * cre ex01 ./data/in/
 
-Make a client request and write the body out to stdout.
+Make a reqwest client request to hn and write the body out to redis.
 
 * cre ex02
-
-Make a client request and write the body out to redis.
-
-* cre ex03
 
 Use hyper as a client to make a request
 
