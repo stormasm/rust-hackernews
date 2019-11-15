@@ -42,6 +42,12 @@ async fn gorun(id: &str) -> Result<(), reqwest::Error> {
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error> {
-    let _ = gorun("8863").await?;
+    let ids = [
+        "8863", "18987885", "18986544", "18987102", "18972892", "18973008",
+    ];
+
+    for id in ids.iter() {
+        let _ = gorun(id).await?;
+    }
     Ok(())
 }
