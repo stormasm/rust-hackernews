@@ -37,15 +37,21 @@ fn write_redis(body: String) -> redis::RedisResult<()> {
     Ok(())
 }
 
-#[tokio::main]
-async fn main() -> Result<(), reqwest::Error> {
-    let url = build_url("8863");
+async fn gorun(id: &str) -> Result<(), reqwest::Error> {
+    let url = build_url(id);
 
     println!("{}", url);
 
     let body = get_body(url).await?;
 
     let _ = write_redis(body);
+
+    Ok(())
+}
+
+#[tokio::main]
+async fn main() -> Result<(), reqwest::Error> {
+    let _ = gorun("8863").await?;
 
     Ok(())
 }
