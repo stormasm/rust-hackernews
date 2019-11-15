@@ -1,26 +1,21 @@
+// This is an exact copy of:
+// https://github.com/seanmonstar/reqwest/blob/master/examples/simple.rs
+//
+
 #![deny(warnings)]
-
-fn build_url(favid: &str) -> String {
-    let mut s = String::from("https://hacker-news.firebaseio.com/v0/item/");
-
-    s.push_str(favid);
-    s.push_str(".json");
-    s
-}
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error> {
-    let url = build_url("8863");
-
-    println!("{}", url);
-
-    let res = reqwest::Client::new().get(url.as_str()).send().await?;
+    let res = reqwest::Client::new()
+        .get("https://hacker-news.firebaseio.com/v0/item/8863.json")
+        .send()
+        .await?;
 
     println!("Status: {}", res.status());
 
     let body = res.text().await?;
 
-    println!("Body:\n{}", body);
+    println!("Body:\n\n{}", body);
 
     Ok(())
 }
